@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html>
-  
-  <head>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  
-  <body>
-     <h1 data-bind="text: title"></h1>
 
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container-wrapper">
+    <h1 class="title" data-bind="text: title"></h1>
+
+<div class="wrap">
+   <div class="search">
+      <input data-bind="value: searchTerm" type="text" class="searchTerm" placeholder="What are you looking for?">
+      <button data-bind="click: searchPage(searchTerm)"type="submit" class="btn btn-primary">Search</button>
+   </div>
+</div>
+
+</div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
     <script src="viewmodel.js"></script>
-  </body>
+</body>
 
 </html>
