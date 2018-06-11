@@ -14,3 +14,12 @@ body{
   justify-content: center;
   align-items: center;
 }
+
+.container-card {
+  border: 1px solid grey;
+  margin-top: 20px;
+}
+
+li {
+  list-style: none;
+}

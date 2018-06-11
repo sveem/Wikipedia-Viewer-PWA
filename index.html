@@ -11,11 +11,27 @@
   <div class="container-wrapper">
     <h1 class="title" data-bind="text: title"></h1>
 
-<div class="wrap">
+<div class="container-form">
    <div class="search">
       <input data-bind="value: searchTerm" type="text" class="searchTerm" placeholder="What are you looking for?">
-      <button data-bind="click: searchPage(searchTerm)"type="submit" class="btn btn-primary">Search</button>
+      <button data-bind="click: searchPage(searchTerm)" class="btn btn-primary">Search</button>
    </div>
+</div>
+
+<div class="container-messages">
+  <!-- ko if: wikiKeys().length > 0 -->
+  <ul data-bind="foreach: wikiKeys()">
+    <li>
+      <div class="container-card">
+        <h3 data-bind="text: $root.pages()[$data].title || $root.searchTerm"></h3>
+         <!--ko if: $root.pages()[$data].thumbnail-->
+         <img data-bind="attr:{src: $root.pages()[$data].thumbnail.source || './assets/not-available.jpg'}"/>
+          <!--/ko-->
+        <p data-bind="text: $root.pages()[$data].terms ? $root.pages()[$data].terms.description[0] : 'N/A' "></p>    
+      </div>
+    </li>
+  </ul>
+  <!-- /ko -->
 </div>
 
 </div>
