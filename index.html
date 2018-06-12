@@ -19,15 +19,15 @@
 </div>
 
 <div class="container-messages">
-  <!-- ko if: wikiKeys().length > 0 -->
+  <!--k o if: wikiKeys().length > 0 -->
   <ul data-bind="foreach: wikiKeys()">
     <li>
       <div class="container-card">
-        <h3 data-bind="text: $root.pages()[$data].title || $root.searchTerm"></h3>
-         <!--ko if: $root.pages()[$data].thumbnail-->
-         <img data-bind="attr:{src: $root.pages()[$data].thumbnail.source || './assets/not-available.jpg'}"/>
-          <!--/ko-->
-        <p data-bind="text: $root.pages()[$data].terms ? $root.pages()[$data].terms.description[0] : 'N/A' "></p>    
+          <h3 data-bind="text: $root.pages()[$data].title || $root.searchTerm"></h3>
+          <p class="extract" data-bind="text: $root.pages()[$data].extract"></p> 
+          <div class="button-read">
+              <button class="btn btn-primary" data-bind="click: $root.readMore($data)">Read More</button>   
+          </div>
       </div>
     </li>
   </ul>
