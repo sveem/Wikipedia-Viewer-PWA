@@ -2,7 +2,9 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -11,22 +13,28 @@
   <div class="container-wrapper">
     <h1 class="title" data-bind="text: title"></h1>
 
-<div class="container-form">
-   <div class="search">
-      <input data-bind="value: searchTerm" type="text" class="searchTerm" placeholder="What are you looking for?">
-      <button data-bind="click: searchPage(searchTerm)" class="btn btn-primary">Search</button>
+<div class="container-search">
+   <div class="search-form">
+      <input class="form-control" data-bind="value: searchTerm" type="text" class="searchTerm" placeholder="What are you looking for?">
+      <button data-bind="click: searchPage(searchTerm)" class="btn btn-primary">
+        <span class="glyphicon glyphicon-search"></span>
+      </button>
    </div>
+<div class="options">
+  <button>Random Article</button>
+  <button>Offline Drop-Down</button>  
+</div>
 </div>
 
 <div class="container-messages">
-  <!--k o if: wikiKeys().length > 0 -->
+  <!-- ko if: wikiKeys().length > 0 -->
   <ul data-bind="foreach: wikiKeys()">
     <li>
       <div class="container-card">
           <h3 data-bind="text: $root.pages()[$data].title || $root.searchTerm"></h3>
-          <p class="extract" data-bind="text: $root.pages()[$data].extract"></p> 
+          <p class="extract" data-bind="text: $root.firstSentence($root.pages()[$data].extract)"></p> 
           <div class="button-read">
-              <button class="btn btn-primary" data-bind="click: $root.readMore($data)">Read More</button>   
+              <button class="btn btn-primary" data-bind="click: $root.visitWikiPage">Read More</button>   
           </div>
       </div>
     </li>
