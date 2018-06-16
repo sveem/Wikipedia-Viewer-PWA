@@ -1,12 +1,15 @@
 body {
-  background: #f2f2f2;
+  background-color: #ABDCD6;
   font-family: 'Open Sans', sans-serif;
   width: 100%;
   height: 100%;
 }
 
 .title {
-  text-align: center;   
+  text-align: center; 
+  font-size: 50px;
+  font-weight: bold; 
+  font-family: 'Open Sans', sans-serif;
 }
 
 .container-wrapper {
@@ -35,7 +38,7 @@ body {
 .container-messages {
   height: auto;
   width: 70%;
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .form-control {
@@ -44,12 +47,33 @@ body {
 }
 
 .form-control:focus {
-  border-color: #337ab7;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #337ab7; 
+  border-color: #EB593C;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #EB593C; 
 }
 
 .btn-primary {
   height: 45px;
+  background-color: #EB593C;
+  border-color: #EB593C;
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background-color: #DA5010;
+  border-color: #DA5010;  
+}
+
+.btn-default {
+  background-color: #008F68;
+  border-color: #008F68;
+  color: whitesmoke;
+  font-family: sans-serif; 
+  /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #008F68; */
+}
+ .btn-default:hover {
+  background-color: #146C03;
+  border-color: #146C03;
+  color: whitesmoke;
 }
 
 .container-card {
@@ -61,16 +85,41 @@ li {
   list-style: none;
   margin-top: 20px;
   border-radius: 25px;
-  background-color: white;
-  border: 1px solid white;
+  background-color: #FFFCEC;
+  border: 1px solid #FFFCEC; 
+}
+
+h3 {
+  font-family: cursive; 
+  font-weight: bold; 
+}
+
+.extract {
+  font-family:cursive;
+  font-size: 16px; 
 }
 
 li:hover {  
-  border: 3px solid #337ab7
+  border: 3px solid #EB593C
 }
 
 .button-read {
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;  
+  align-items: flex-end;
+  font-family: 'Open Sans', sans-serif; 
+  font-weight: bold;
+  /*color: #222222*/
+  /*background-color: #EB593C;*/
+  /*border-color: #EB593C;    */
 }
+
+/*color:
+color: #D11250
+#DB5800
+#006899
+#008F68
+#EB593C
+#333333
+#ABDCD6
+#FFFCEC*/

@@ -21,25 +21,25 @@
       </button>
    </div>
 <div class="options">
-  <button>Random Article</button>
-  <button>Offline Drop-Down</button>  
+  <button class="btn btn-default" data-bind="click: $root.visitRandomWikiPage">Random Article</button> <!-- Not Completed -->
+  <!--<button>Offline Drop-Down</button>  -->
 </div>
 </div>
 
 <div class="container-messages">
-  <!-- ko if: wikiKeys().length > 0 -->
   <ul data-bind="foreach: wikiKeys()">
     <li>
+  <!-- ko if: false -->
       <div class="container-card">
           <h3 data-bind="text: $root.pages()[$data].title || $root.searchTerm"></h3>
           <p class="extract" data-bind="text: $root.firstSentence($root.pages()[$data].extract)"></p> 
           <div class="button-read">
-              <button class="btn btn-primary" data-bind="click: $root.visitWikiPage">Read More</button>   
+              <button class="btn btn-primary" data-bind="click: $root.visitSelectedWikiPage">Read More</button>   
           </div>
       </div>
+  <!-- /ko -->
     </li>
   </ul>
-  <!-- /ko -->
 </div>
 
 </div>

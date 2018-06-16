@@ -5,7 +5,7 @@ app.vm = (function() {
   var pages = ko.observable();
   var searchTerm = '';
   var showMessages = ko.observable(false);
-  
+
   function searchPage(term) {
     var url2 = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages%7Cpageterms%7Cextracts%7Cinfo&list=&generator=search&piprop=thumbnail&pithumbsize=500&pilimit=10&wbptterms=description&exsentences=3&explaintext=1&exlimit=10&inprop=url&exintro=1&gsrsearch=" + term.toLowerCase() + "&gsrlimit10=&callback=?"
     $.getJSON(url2, function (data) {
@@ -27,9 +27,14 @@ app.vm = (function() {
     return extract ? extract.split('. ')[0] : undefined;
   }
 
-  function visitWikiPage(id) {
+  function visitSelectedWikiPage(id) {
     var url = 'https://en.wikipedia.org/?curid='
     return window.location.href = (url + id);  
+  }
+
+  function visitRandomWikiPage() {
+    var url = "https://en.wikipedia.org/wiki/Special:Random";
+    return window.location.href = url;
   }
 
   var vm = {
@@ -38,9 +43,10 @@ app.vm = (function() {
     searchPage: searchPage,
     wikiKeys: wikiKeys,
     pages: pages,
-    visitWikiPage: visitWikiPage,
+    visitSelectedWikiPage: visitSelectedWikiPage,
     showMessages: showMessages,
-    firstSentence: firstSentence 
+    firstSentence: firstSentence,
+    visitRandomWikiPage: visitRandomWikiPage
   };
  
   return vm;
@@ -49,3 +55,4 @@ app.vm = (function() {
 $(function() {
   ko.applyBindings(app.vm);  
 });
+
