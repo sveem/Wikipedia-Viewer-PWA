@@ -20,7 +20,7 @@ body {
 }
 
 .container-search {
-  margin-top: 30px;
+  margin-top: 150px;
 }
 
 .search-form {
@@ -50,27 +50,61 @@ body {
   border-color: #EB593C;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #EB593C; 
 }
+               
+.search-button,
+.read-button,
+.random-article-button {
+  font-weight: bold;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
 
-.btn-primary {
-  height: 45px;
+.search-button,
+.read-button {
   background-color: #EB593C;
   border-color: #EB593C;
-  font-weight: bold;
 }
 
-.btn-primary:hover {
-  background-color: #DA5010;
+.search-button {
+  height: 45px;  
+}
+
+.search-button:hover,
+.read-button:hover {
+  background-color: #DA5010;  
   border-color: #DA5010;  
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #EB593C; 
 }
 
-.btn-default {
+.glyphicon {
+  color: whitesmoke;
+}
+
+.random-article-button {
   background-color: #008F68;
   border-color: #008F68;
   color: whitesmoke;
   font-family: sans-serif; 
-  /*box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #008F68; */
+  margin-top: 5px;
 }
- .btn-default:hover {
+.random-article-button:hover {
   background-color: #146C03;
   border-color: #146C03;
   color: whitesmoke;
@@ -83,10 +117,15 @@ body {
 
 li {
   list-style: none;
+  display: none;
   margin-top: 20px;
   border-radius: 25px;
   background-color: #FFFCEC;
   border: 1px solid #FFFCEC; 
+}
+
+li:hover {  
+  border: 3px solid #EB593C
 }
 
 h3 {
@@ -99,19 +138,16 @@ h3 {
   font-size: 16px; 
 }
 
-li:hover {  
-  border: 3px solid #EB593C
-}
-
-.button-read {
+.container-read-button {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+}
+
+.read-button {
   font-family: 'Open Sans', sans-serif; 
   font-weight: bold;
-  /*color: #222222*/
-  /*background-color: #EB593C;*/
-  /*border-color: #EB593C;    */
+  color: whitesmoke;
 }
 
 /*color:

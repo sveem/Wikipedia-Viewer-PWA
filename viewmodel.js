@@ -14,7 +14,7 @@ app.vm = (function() {
       showMessages(true);
     })
   }
-
+ // TODO: Replace Bootstrap button with my own. Add styling to them
   var wikiKeys = ko.computed(function() {
     var storage = [];
     for (var key in pages()) {
