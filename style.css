@@ -86,6 +86,13 @@ body {
   height: 45px;  
 }
 
+.search-button:focus,
+.read-button:focus,
+.random-article-button:focus {
+  outline: none;
+}
+
+
 .search-button:hover,
 .read-button:hover {
   background-color: #DA5010;  
@@ -100,10 +107,12 @@ body {
 .random-article-button {
   background-color: #008F68;
   border-color: #008F68;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
   color: whitesmoke;
-  font-family: sans-serif; 
-  margin-top: 5px;
+  margin-top: 10px;
 }
+
 .random-article-button:hover {
   background-color: #146C03;
   border-color: #146C03;
@@ -150,7 +159,7 @@ h3 {
   color: whitesmoke;
 }
 
-/*color:
+/*colors:
 color: #D11250
 #DB5800
 #006899
