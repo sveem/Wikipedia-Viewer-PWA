@@ -1,41 +1,37 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
-    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
-    
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="container-wrapper">
-    <h1 class="title" data-bind="text: title"></h1>
+<div class="container-wrapper">
+  <h1 class="title" data-bind="text: title"></h1>
 
 <div class="container-search">
-   <div class="search-form">
-      <input class="form-control" data-bind="value: searchTerm" type="text" class="searchTerm" placeholder="What are you looking for?">
-      <button data-bind="click: searchPage(searchTerm)" class="search-button">
-        <span class="glyphicon glyphicon-search"></span>
-      </button>
-   </div>
-<div class="options">
-  <button class="random-article-button" data-bind="click: $root.visitRandomWikiPage">Random Article</button> <!-- Not Completed Change font-style -->
-  <!--<button>Offline Drop-Down</button>  -->
-</div>
+  <div class="search-form">
+    <input class="form-control" data-bind="value: searchTerm" type="text" 
+    class="searchTerm" placeholder="What are you looking for?">
+    <button data-bind="click: searchPage(searchTerm)" class="search-button">
+      <span class="glyphicon glyphicon-search"></span>
+    </button>
+  </div>
+  <div class="options">
+    <button class="random-article-button" data-bind="click: $root.visitRandomWikiPage">Random Article</button> 
+  </div>
 </div>
 
 <div class="container-messages">
   <ul data-bind="foreach: wikiKeys()">
     <li data-bind="style: {display: $root.wikiKeys().length > 1 ? 'list-item' : 'none'}">
       <div class="container-card">
-          <h3 data-bind="text: $root.pages()[$data].title || $root.searchTerm"></h3>
-          <p class="extract" data-bind="text: $root.firstSentence($root.pages()[$data].extract)"></p> 
-          <div class="container-read-button">
-              <button class="read-button" data-bind="click: $root.visitSelectedWikiPage">Read More</button>   
-          </div>
+        <h3 data-bind="text: $root.pages()[$data].title || $root.searchTerm"></h3>
+        <p class="extract" data-bind="text: $root.firstSentence($root.pages()[$data].extract)"></p> 
+        <div class="container-read-button">
+          <button class="read-button" data-bind="click: $root.visitSelectedWikiPage">Read More</button>   
+        </div>
       </div>
     </li>
   </ul>
