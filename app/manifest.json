@@ -1,0 +1,44 @@
+{
+  "name": "Wikipedia PWA Viewer",
+  "short_name": "WViewer-PWA",
+  "icons": [
+    {
+      "src": "/assets/wikipedia-16.jpg",
+      "type": "image/jpg",
+      "sizes": "16x16"
+    },
+     {
+      "src": "/assets/wikipedia-32.jpg",
+      "type": "image/jpg",
+      "sizes": "32x32"
+    },
+    {
+      "src": "/assets/wikipedia-64.jpg",
+      "type": "image/jpg",
+      "sizes": "64x64"
+    },
+    {
+      "src": "/assets/wikipedia-128.jpg",
+      "type": "image/jpg",
+      "sizes": "128x128"
+    },
+    {
+      "src": "/assets/wikipedia-32.jpg",
+      "type": "image/jpg",
+      "sizes": "256x256"
+    },
+    {
+      "src": "/assets/wikipedia-32.jpg",
+      "type": "image/jpg",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/index.html",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ABDCD6",
+  "description": "Wikipedia PWA Viewer",
+  "dir": "ltr",
+  "lang": "en-US"
+}
