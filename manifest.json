@@ -3,33 +3,38 @@
   "short_name": "WViewer-PWA",
   "icons": [
     {
-      "src": "/assets/wikipedia-16.jpg",
-      "type": "image/jpg",
+      "src": "/assets/wikipedia-16.png",
+      "type": "image/png",
       "sizes": "16x16"
     },
      {
-      "src": "/assets/wikipedia-32.jpg",
-      "type": "image/jpg",
+      "src": "/assets/wikipedia-32.png",
+      "type": "image/png",
       "sizes": "32x32"
     },
     {
-      "src": "/assets/wikipedia-64.jpg",
-      "type": "image/jpg",
+      "src": "/assets/wikipedia-64.png",
+      "type": "image/png",
       "sizes": "64x64"
     },
     {
-      "src": "/assets/wikipedia-128.jpg",
-      "type": "image/jpg",
+      "src": "/assets/wikipedia-128.png",
+      "type": "image/png",
       "sizes": "128x128"
     },
     {
-      "src": "/assets/wikipedia-32.jpg",
-      "type": "image/jpg",
+      "src": "/assets/wikipedia-144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "/assets/wikipedia-256.png",
+      "type": "image/png",
       "sizes": "256x256"
     },
     {
-      "src": "/assets/wikipedia-32.jpg",
-      "type": "image/jpg",
+      "src": "/assets/wikipedia-512.png",
+      "type": "image/png",
       "sizes": "512x512"
     }
   ],
