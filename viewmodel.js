@@ -5,6 +5,15 @@ app.vm = (function() {
   var pages = ko.observable();
   var searchTerm = '';
   var showMessages = ko.observable(false);
+  var sw = './sw.js';
+
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker
+    .register(sw)
+    .then(function() {
+      console.log('Service worker registered');
+    })
+  }
 
   function searchPage(term) {
     var url2 = 'https://en.wikipedia.org/w/api.php?action=query&format=' +
