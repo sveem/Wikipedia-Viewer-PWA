@@ -13,6 +13,9 @@ app.vm = (function() {
     .then(function() {
       console.log('Service worker registered');
     })
+    .catch(function(error) {
+      console.log('Error in Service Worker', error);
+    })
   }
 
   function searchPage(term) {
