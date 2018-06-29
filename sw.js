@@ -1,7 +1,9 @@
+importScripts('./idb.js')
+
 self.addEventListener('install', function(event) {
   console.log('[Service Worker] Installing Service Worker ...', event);
   event.waitUntil(
-    caches.open('static-files')
+    caches.open('static')
       .then(function(cache) {
         console.log('Cache status', cache);
         cache.addAll([
@@ -9,7 +11,8 @@ self.addEventListener('install', function(event) {
           '/index.html',
           '/style.css',
           '/viewmodel.js',
-          'netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
+          '/idb.js',
+          'https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
           'https://fonts.googleapis.com/css?family=Open+Sans',
           'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js',
           'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js'
