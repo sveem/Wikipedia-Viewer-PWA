@@ -5,12 +5,31 @@ app.vm = (function() {
   var pages = ko.observable();
   var searchTerm = '';
   var showMessages = ko.observable(false);
+  var sw = './sw.js';
+  var searchValue = ko.observable();
+  var allSearches = ko.observableArray([
+    { term :'chess' }, 
+    { term: 'Bmw' }, 
+    { term: 'Spain' }
+  ])
+
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker
+    .register(sw)
+    .then(function() {
+      console.log('Service worker registered');
+    })
+    .catch(function(error) {
+      console.log('Error in Service Worker', error);
+    })
+  }
 
   function searchPage(term) {
+    var searchTerm = term //|| 'wikipedia'
     var url2 = 'https://en.wikipedia.org/w/api.php?action=query&format=' +
       'json&prop=pageimages%7Cpageterms%7Cextracts%7Cinfo&list=&generator=search&piprop=' +
       'thumbnail&pithumbsize=500&pilimit=10&wbptterms=description&exsentences=3&explaintext=' +
-      '1&exlimit=10&inprop=url&exintro=1&gsrsearch=' + term.toLowerCase() + '&gsrlimit10=&callback=?'
+      '1&exlimit=10&inprop=url&exintro=1&gsrsearch=' + searchTerm.toLowerCase() + '&gsrlimit10=&callback=?'
     $.getJSON(url2, function(data) {
       data.query ? pages(data.query.pages) : pages({
         info: 'The search parameter must be set'
@@ -51,7 +70,9 @@ app.vm = (function() {
     visitSelectedWikiPage: visitSelectedWikiPage,
     showMessages: showMessages,
     firstSentence: firstSentence,
-    visitRandomWikiPage: visitRandomWikiPage
+    visitRandomWikiPage: visitRandomWikiPage,
+    allSearches: allSearches,
+    searchValue: searchValue
   };
 
   return vm;

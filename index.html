@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="/manifest.json">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link href="/manifest.json" rel="manifest">
 </head>
 
 <body>
@@ -15,12 +15,18 @@
   <div class="search-form">
     <input class="form-control" data-bind="value: searchTerm" type="text" 
     class="searchTerm" placeholder="What are you looking for?">
-    <button data-bind="click: searchPage(searchTerm)" class="search-button">
+    <button class="search-button" data-bind="click: searchPage(searchTerm)">
       <span class="glyphicon glyphicon-search"></span>
     </button>
   </div>
   <div class="options">
     <button class="random-article-button" data-bind="click: $root.visitRandomWikiPage">Random Article</button> 
+    <select data-bind=
+      "option: $root.allSearches
+       optionsText: 'term',
+       value: $root.searchValue,
+       optionsCaption: 'Choose...'">
+    </select>
   </div>
 </div>
 
@@ -42,6 +48,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
     <script src="viewmodel.js"></script>
+    <script src="idb.js"></script>
 </body>
 
 </html>
