@@ -53,7 +53,8 @@ body {
                
 .search-button,
 .read-button,
-.random-article-button {
+.random-article-button,
+.dropdown-button {
   font-weight: bold;
   display: inline-block;
   padding: 6px 12px;
@@ -104,13 +105,15 @@ body {
   color: whitesmoke;
 }
 
-.random-article-button {
+.random-article-button,
+.dropdown-button {
   background-color: #008F68;
   border-color: #008F68;
   font-family: 'Open Sans', sans-serif;
   font-weight: bold;
   color: whitesmoke;
   margin-top: 10px;
+  width: 125px
 }
 
 .random-article-button:hover {
@@ -118,6 +121,7 @@ body {
   border-color: #146C03;
   color: whitesmoke;
 }
+
 
 .container-card {
   margin: auto 0;

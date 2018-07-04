@@ -1,22 +1,27 @@
-importScripts('./idb.js')
+importScripts('./shared/idb.js');
+importScripts('./shared/utility.js');
+
+var CACHE_STATIC_NAME = 'static';
+var STATIC_FILES = [
+    '/',
+    '/index.html',
+    '/style.css',
+    '/viewmodel.js',
+    './shared/idb.js',
+    './shared/utility.js',
+    'https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
+    'https://fonts.googleapis.com/css?family=Open+Sans',
+    'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js'
+];
 
 self.addEventListener('install', function(event) {
   console.log('[Service Worker] Installing Service Worker ...', event);
   event.waitUntil(
-    caches.open('static')
+    caches.open(CACHE_STATIC_NAME)
       .then(function(cache) {
         console.log('Cache status', cache);
-        cache.addAll([
-          '/',
-          '/index.html',
-          '/style.css',
-          '/viewmodel.js',
-          '/idb.js',
-          'https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
-          'https://fonts.googleapis.com/css?family=Open+Sans',
-          'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js',
-          'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js'
-        ]);
+        cache.addAll(STATIC_FILES);
       })
   )
 });
@@ -28,15 +33,13 @@ self.addEventListener('activate', function(event) {
 
 self.addEventListener('fetch', function(event) {
   console.log('[Service Worker] Fetching something ...', event);
-  event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        if (response) {
-          return response;
-        }
-        else {
-          fetch(event.request);
-        }
-      }
-   ));
+  var url = 'https://en.wikipedia.org/'
+  var matched = event.request.url.match(url);
+  event.respondWith(fetch(event.request.url)
+    .then(function (res) {
+        console.log('Response', res)
+        var clonedRes = res.clone();
+        return clonedRes               
+      })
+    )
 })
