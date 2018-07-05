@@ -10,6 +10,8 @@ app.vm = (function () {
   var searchValue = ko.observable(searchResult()[0]);
   
   if ('serviceWorker' in navigator) {
+    console.log('Service Worker');
+    console.log('SW', sw);
     navigator.serviceWorker
       .register(sw)
       .then(function () {

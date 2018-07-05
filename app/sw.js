@@ -1,45 +1,69 @@
-importScripts('./shared/idb.js');
-importScripts('./shared/utility.js');
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.3.1/workbox-sw.js");
 
-// var CACHE_STATIC_NAME = 'static';
-// var STATIC_FILES = [
-//     '/',
-//     '/index.html',
-//     '/style.css',
-//     '/viewmodel.js',
-//     './shared/idb.js',
-//     './shared/utility.js',
-//     'https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css',
-//     'https://fonts.googleapis.com/css?family=Open+Sans',
-//     'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js',
-//     'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js'
-// ];
+workbox.routing.registerRoute(/.*(?:googleapis|gstatic)\.com.*$/, 
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: 'google-fonts'  
+}));
 
-// self.addEventListener('install', function(event) {
-//   console.log('[Service Worker] Installing Service Worker ...', event);
-//   event.waitUntil(
-//     caches.open(CACHE_STATIC_NAME)
-//       .then(function(cache) {
-//         console.log('Cache status', cache);
-//         cache.addAll(STATIC_FILES);
-//       })
-//   )
-// });
-
-// self.addEventListener('activate', function(event) {
-//   console.log('[Service Worker] Activating Service Worker ...', event);
-//   return self.clients.claim();
-// });
-
-// self.addEventListener('fetch', function(event) {
-//   console.log('[Service Worker] Fetching something ...', event);
-//   var url = 'https://en.wikipedia.org/'
-//   var matched = event.request.url.match(url);
-//   event.respondWith(fetch(event.request.url)
-//     .then(function (res) {
-//         console.log('Response', res)
-//         var clonedRes = res.clone();
-//         return clonedRes               
-//       })
-//     )
-// })
+workbox.precaching.precacheAndRoute([
+  {
+    "url": "index.html",
+    "revision": "88dfe962085c4a0d05de5141f1b6df7f"
+  },
+  {
+    "url": "manifest.json",
+    "revision": "f3ed9a89c04b199f320bafb978490095"
+  },
+  {
+    "url": "shared/idb.js",
+    "revision": "edfbee0bb03a5947b5a680c980ecdc9f"
+  },
+  {
+    "url": "shared/utility.js",
+    "revision": "23b059eb415c018637a98ca7db1d3603"
+  },
+  {
+    "url": "style.css",
+    "revision": "85ecc83bc3b234d59c77cd6af8958637"
+  },
+  {
+    "url": "sw-base.js",
+    "revision": "2631ed4be51c509b632293c751630ea2"
+  },
+  {
+    "url": "viewmodel.js",
+    "revision": "32ef08332749f43da45f6d0908bd5aca"
+  },
+  {
+    "url": "assets/not-available.jpg",
+    "revision": "f24bfaf606cccf8cba4993655fbc8905"
+  },
+  {
+    "url": "assets/wikipedia-128.png",
+    "revision": "32ea0cdcb8e24ea68b3c3c8e266d78ee"
+  },
+  {
+    "url": "assets/wikipedia-144.png",
+    "revision": "fb5f942c535d282795fb18357397266f"
+  },
+  {
+    "url": "assets/wikipedia-16.png",
+    "revision": "6b01cc54b1ddd6a61884b9f802f236c9"
+  },
+  {
+    "url": "assets/wikipedia-256.png",
+    "revision": "316dd5b8aaa7ed4cb456e367e01993d1"
+  },
+  {
+    "url": "assets/wikipedia-32.png",
+    "revision": "b7242773779893e3d0db479828a9b6a1"
+  },
+  {
+    "url": "assets/wikipedia-512.png",
+    "revision": "0aa259e015bd1202795efb571e98cfc7"
+  },
+  {
+    "url": "assets/wikipedia-64.png",
+    "revision": "4da35db3572b5089f505b2b0dff19d5f"
+  }
+]);
