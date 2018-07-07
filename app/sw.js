@@ -1,8 +1,21 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.3.1/workbox-sw.js");
+importScripts('./shared/idb.js');
+importScripts('./shared/utility.js')
 
 workbox.routing.registerRoute(/.*(?:googleapis|gstatic)\.com.*$/, 
   new workbox.strategies.StaleWhileRevalidate({
-    cacheName: 'google-fonts'  
+    cacheName: 'google-fonts',
+    plugins: [
+    new workbox.expiration.Plugin({
+      maxAgeSeconds: 60 * 60 * 24 * 30,
+      maxEntries: 3
+    })
+  ]
+})); 
+
+workbox.routing.registerRoute(/.*(?:bootstrapcdn)\.com.*$/, 
+  new workbox.strategies.StaleWhileRevalidate({
+    cacheName: 'bootstrap-css'  
 }));
 
 workbox.precaching.precacheAndRoute([
@@ -28,11 +41,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "sw-base.js",
-    "revision": "2631ed4be51c509b632293c751630ea2"
+    "revision": "9ea7980f3d642a7c87ebc901525931c7"
   },
   {
     "url": "viewmodel.js",
-    "revision": "32ef08332749f43da45f6d0908bd5aca"
+    "revision": "fb7ed265621a04755d7d22a17f83beb7"
   },
   {
     "url": "assets/not-available.jpg",
