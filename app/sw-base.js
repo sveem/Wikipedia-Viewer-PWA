@@ -23,21 +23,38 @@ workbox.routing.registerRoute(/.*(?:bootstrapcdn)\.com.*$/,
 workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
   fetch(args.event.request)
     .then(function (res) { 
-      var clonedRes = res.clone();
-      clearAllData('input')
-        .then(function () {
+      var clonedRes = res.clone()
           return clonedRes.json();
         })
         .then(function (data) {
           var pages = data.query.pages;
-          for (var key in pages) {
-            console.log('KEY', key);
-            console.log('PAGES[KEY]', pages[key]);
-            writeData('input', pages[key]);
-          }  
+          writeData('input', { pages: pages })
+          return data;
         });
-      return res;
-    });
 });
 
 workbox.precaching.precacheAndRoute([]);
+
+
+// workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
+//   fetch(args.event.request)
+//     .then(function (res) { 
+//       var clonedRes = res.clone();
+//       // Remove clearAllData - Create a button to clean the collection in indexedDB
+//       clearAllData('input')
+//         .then(function () {
+//           return clonedRes.json();
+//         })
+//         .then(function (data) {
+//           var pages = data.query.pages;
+//           writeData('input', {pageid : 123, pages: pages})
+//           // TODO: Modify pageid - Everything works!!!!
+//           // Add lodash, remove pages.pageid - change the shape of the data
+//           // 
+//           // for (var key in pages) {
+//           //   writeData('input', pages[key]);
+//           // }  
+//         });
+//       return res;
+//     });
+// });

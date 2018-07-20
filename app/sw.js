@@ -23,50 +23,76 @@ workbox.routing.registerRoute(/.*(?:bootstrapcdn)\.com.*$/,
 workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
   fetch(args.event.request)
     .then(function (res) { 
-      var clonedRes = res.clone();
-      clearAllData('input')
-        .then(function () {
+      var clonedRes = res.clone()
           return clonedRes.json();
         })
         .then(function (data) {
+          console.log('DATAAAA', data);
           var pages = data.query.pages;
-          for (var key in pages) {
-            console.log('KEY', key);
-            console.log('PAGES[KEY]', pages[key]);
-            writeData('input', pages[key]);
-          }  
+          writeData('input', {pages: pages})
+          // writeData('input', {pageid : 12, pages: pages})
+
+          // TODO: Modify pageid - Everything works!!!!
+          // Add lodash, remove pages.pageid - change the shape of the data
+          // 
+          // for (var key in pages) {
+          //   writeData('input', pages[key]);
+          // }  
+          return data;
         });
-      return res;
-    });
 });
 
 workbox.precaching.precacheAndRoute([
   {
     "url": "index.html",
-    "revision": "b9955902ae4dd6d497dec07c917a3523"
+    "revision": "0242c48ff0ea2f22f059437016c321a7"
   },
   {
     "url": "manifest.json",
-    "revision": "973a66ea74c1181a3bb2af738951215f"
+    "revision": "f3ed9a89c04b199f320bafb978490095"
   },
   {
     "url": "shared/idb.js",
-    "revision": "017ced36d82bea1e08b08393361e354d"
+    "revision": "edfbee0bb03a5947b5a680c980ecdc9f"
   },
   {
     "url": "shared/utility.js",
-    "revision": "12bc69925e778c18146a6bf12138e062"
+    "revision": "5c17dae3069303e9000c1f69fed0e533"
   },
   {
     "url": "style.css",
-    "revision": "29647101ffd35a086a4591415b324f1f"
+    "revision": "85ecc83bc3b234d59c77cd6af8958637"
   },
   {
     "url": "sw-base.js",
-    "revision": "66914c908ed66866abd928994f8147d2"
+    "revision": "60a845d22e398b7f9c5fa02893c2680f"
   },
   {
     "url": "viewmodel.js",
-    "revision": "3fd56a097d4a12436f309e939d29f773"
+    "revision": "10d7f79a57f64ae6ffc736019e73e7e4"
   }
 ]);
+
+
+// workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
+//   fetch(args.event.request)
+//     .then(function (res) { 
+//       var clonedRes = res.clone();
+//       // Remove clearAllData - Create a button to clean the collection in indexedDB
+//       clearAllData('input')
+//         .then(function () {
+//           return clonedRes.json();
+//         })
+//         .then(function (data) {
+//           var pages = data.query.pages;
+//           writeData('input', {pageid : 123, pages: pages})
+//           // TODO: Modify pageid - Everything works!!!!
+//           // Add lodash, remove pages.pageid - change the shape of the data
+//           // 
+//           // for (var key in pages) {
+//           //   writeData('input', pages[key]);
+//           // }  
+//         });
+//       return res;
+//     });
+// });
