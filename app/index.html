@@ -32,7 +32,7 @@
 
 <div class="container-messages">
   <ul data-bind="foreach: wikiKeys()">
-    <li data-bind="style: {display: $root.wikiKeys().length > 1 ? 'list-item' : 'none'}">
+    <li data-bind="style: {display: $root.wikiKeys().length >= 1 ? 'list-item' : 'none'}">
       <div class="container-card">
         <h3 data-bind="text: $root.pages()[$data].title || $root.searchTerm"></h3>
         <p class="extract" data-bind="text: $root.firstSentence($root.pages()[$data].extract)"></p> 

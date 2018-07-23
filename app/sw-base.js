@@ -21,13 +21,15 @@ workbox.routing.registerRoute(/.*(?:bootstrapcdn)\.com.*$/,
 );
 
 workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
+  console.log('ARGS', args.event)
   fetch(args.event.request)
     .then(function (res) { 
       var clonedRes = res.clone()
           return clonedRes.json();
         })
         .then(function (data) {
-          var pages = data.query.pages;
+         //Write data only if there is no other data
+          var pages = data.query.pages
           writeData('input', { pages: pages })
           return data;
         });

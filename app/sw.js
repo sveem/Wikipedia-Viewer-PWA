@@ -21,23 +21,16 @@ workbox.routing.registerRoute(/.*(?:bootstrapcdn)\.com.*$/,
 );
 
 workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
+  console.log('ARGS', args.event)
   fetch(args.event.request)
     .then(function (res) { 
       var clonedRes = res.clone()
           return clonedRes.json();
         })
         .then(function (data) {
-          console.log('DATAAAA', data);
-          var pages = data.query.pages;
-          writeData('input', {pages: pages})
-          // writeData('input', {pageid : 12, pages: pages})
-
-          // TODO: Modify pageid - Everything works!!!!
-          // Add lodash, remove pages.pageid - change the shape of the data
-          // 
-          // for (var key in pages) {
-          //   writeData('input', pages[key]);
-          // }  
+          console.log('ITEM', data);
+          var pages = data.query.pages
+          writeData('input', { pages: pages })
           return data;
         });
 });
@@ -45,7 +38,7 @@ workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
 workbox.precaching.precacheAndRoute([
   {
     "url": "index.html",
-    "revision": "0242c48ff0ea2f22f059437016c321a7"
+    "revision": "8d486ee975def73c7de8df6f529145f1"
   },
   {
     "url": "manifest.json",
@@ -57,7 +50,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "shared/utility.js",
-    "revision": "5c17dae3069303e9000c1f69fed0e533"
+    "revision": "6d949b6d73c242adf3585142557e8c93"
   },
   {
     "url": "style.css",
@@ -65,11 +58,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "sw-base.js",
-    "revision": "60a845d22e398b7f9c5fa02893c2680f"
+    "revision": "8f6d932cce70cf382904576c3822c569"
   },
   {
     "url": "viewmodel.js",
-    "revision": "10d7f79a57f64ae6ffc736019e73e7e4"
+    "revision": "4d5b72db19df1919e38a6f63df65447d"
   }
 ]);
 
