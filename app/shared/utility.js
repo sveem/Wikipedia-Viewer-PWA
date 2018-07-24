@@ -45,6 +45,11 @@ function deleteItemFromData(st, id) {
       return tx.complete;
     })
     .then(function() {
-      console.log('Item deleted!');
+      console.info('Item deleted!');
     });
+}
+
+function getSearchInput(url) {
+  var searchUrl = url.split('&');
+  return searchUrl[searchUrl.length-2].slice(10)
 }

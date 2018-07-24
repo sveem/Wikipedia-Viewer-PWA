@@ -13,34 +13,35 @@ app.vm = (function () {
     navigator.serviceWorker
       .register(sw)
       .then(function () {
-        console.log('Service worker registered');
+        console.info('Service worker registered');
       })
       .catch(function (error) {
-        console.log('Error in Service worker', error);
+        console.error('Error in Service worker', error);
       });
   }
 
   if (!('indexedDB' in window)) {
-    console.log('This browser doesn\'t support IndexedDB');
+    console.error('This browser doesn\'t support IndexedDB');
     return;
   }
 
-  if (!window.navigator.onLine) {
+  // if (!window.navigator.onLine) {
     readAllData('terms')
       .then(function (data) {
         searchResult(data);
       });
-  }
+  // }
 
   function searchPage(term) {
+    var query = term.toLowerCase();
     var url = 'https://en.wikipedia.org/w/api.php?format=' +
       'json&action=query&origin=*&prop=pageimages%7Cpageterms%7Cextracts%7Cinfo&list=&generator=search&piprop=' +
       'thumbnail&pithumbsize=500&pilimit=10&wbptterms=description&exsentences=3&explaintext=' +
-      '1&exlimit=10&inprop=url&exintro=1&gsrsearch=' + term.toLowerCase() + '&gsrlimit10=';
+      '1&exlimit=10&inprop=url&exintro=1&gsrsearch=' + query + '&gsrlimit10=';
 
-    addSearchResult(term);
+    addSearchResult(query);
 
-    if (term && window.navigator.onLine) {
+    if (query && window.navigator.onLine) {
       $.getJSON(url).then(function (response) {
         response.query ? pages(response.query.pages) : pages({
           info: 'The search parameter must be set'
@@ -50,23 +51,27 @@ app.vm = (function () {
   }
 
   function addSearchResult(search) {
-    // ToDo: Show all offline records once you'r back online
-    if (search && searchResult().indexOf(search.toLowerCase()) === -1) {
-      searchResult.push(search.toLowerCase());
-      writeData('terms', search);
+    if (search && _.indexOf(searchResult(), search) === -1) {
+      searchResult.push(search);
+      readAllData('terms')
+        .then(function (response) {
+          if (_.indexOf(response, search) === -1) {
+            writeData('terms', search);
+          }
+        })
     }
     return;
   }
 
   var wikiKeys = ko.computed(function () {
     var storage = [];
-    for (var key in pages()) {
+    _.forIn(pages(), function (value, key) {
       storage.push(key);
-    }
+    })
     return storage;
-  });
+  });;
 
-  function firstSentence(extract) {
+  function getFirstSentence(extract) {
     return extract ? extract.split('. ')[0] : undefined;
   }
 
@@ -83,14 +88,10 @@ app.vm = (function () {
   function onChange(event) {
     searchPage(searchValue());
     if (!window.navigator.onLine) {
-      readAllData('terms')
+      readAllData('input')
         .then(function (data) {
-          searchValueIndex(data.indexOf(searchValue().toString()));
-          readAllData('input')
-            .then(function (data) {
-              pages(data[searchValueIndex()].pages);
-              wikiKeys();
-            })
+          pages(_.find(data, ['key', searchValue()]).pages)
+          wikiKeys();
         })
     }
   }
@@ -102,7 +103,7 @@ app.vm = (function () {
     wikiKeys: wikiKeys,
     pages: pages,
     visitSelectedWikiPage: visitSelectedWikiPage,
-    firstSentence: firstSentence,
+    getFirstSentence: getFirstSentence,
     visitRandomWikiPage: visitRandomWikiPage,
     searchResult: searchResult,
     searchValue: searchValue,
