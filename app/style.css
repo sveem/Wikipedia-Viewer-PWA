@@ -6,14 +6,14 @@ body {
 }
 
 .title {
-  text-align: center; 
+  text-align: center;
   font-size: 50px;
-  font-weight: bold; 
+  font-weight: bold;
   font-family: 'Open Sans', sans-serif;
 }
 
 .container-wrapper {
-  display: flex;  
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -24,13 +24,13 @@ body {
 }
 
 .search-form {
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .options {
-  display: flex;  
+  display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
@@ -48,10 +48,11 @@ body {
 
 .form-control:focus {
   border-color: #EB593C;
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #EB593C; 
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #EB593C;
 }
-               
+
 .search-button,
+.delete-button,
 .read-button,
 .random-article-button,
 .dropdown-button {
@@ -78,16 +79,19 @@ body {
 }
 
 .search-button,
+.delete-button,
 .read-button {
   background-color: #EB593C;
   border-color: #EB593C;
 }
 
-.search-button {
-  height: 45px;  
+.search-button,
+.delete-button {
+  height: 45px;
 }
 
 .search-button:focus,
+.delete-button:focus,
 .read-button:focus,
 .random-article-button:focus {
   outline: none;
@@ -95,10 +99,11 @@ body {
 
 
 .search-button:hover,
+.delete-button:hover,
 .read-button:hover {
-  background-color: #DA5010;  
-  border-color: #DA5010;  
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #EB593C; 
+  background-color: #DA5010;
+  border-color: #DA5010;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px #EB593C;
 }
 
 .glyphicon {
@@ -134,21 +139,21 @@ li {
   margin-top: 20px;
   border-radius: 25px;
   background-color: #FFFCEC;
-  border: 1px solid #FFFCEC; 
+  border: 1px solid #FFFCEC;
 }
 
-li:hover {  
+li:hover {
   border: 3px solid #EB593C
 }
 
 h3 {
-  font-family: cursive; 
-  font-weight: bold; 
+  font-family: cursive;
+  font-weight: bold;
 }
 
 .extract {
-  font-family:cursive;
-  font-size: 16px; 
+  font-family: cursive;
+  font-size: 16px;
 }
 
 .container-read-button {
@@ -158,17 +163,21 @@ h3 {
 }
 
 .read-button {
-  font-family: 'Open Sans', sans-serif; 
+  font-family: 'Open Sans', sans-serif;
   font-weight: bold;
   color: whitesmoke;
 }
 
-/*colors:
-color: #D11250
+/* 
+-------------
+Basic Colors:
+-------------
+#D11250
 #DB5800
 #006899
 #008F68
 #EB593C
 #333333
 #ABDCD6
-#FFFCEC*/
+#FFFCEC
+*/

@@ -1,7 +1,8 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.3.1/workbox-sw.js");
-importScripts('./shared/lodash.js');
-importScripts('./shared/idb.js');
-importScripts('./shared/utility.js');
+importScripts('./services/lodash.js');
+importScripts('./services/idb.js');
+importScripts('./services/utility.js');
+importScripts('./services/helpers.js');
 
 workbox.routing.registerRoute(/.*(?:googleapis|gstatic)\.com.*$/,
   new workbox.strategies.StaleWhileRevalidate({
@@ -22,9 +23,9 @@ workbox.routing.registerRoute(/.*(?:bootstrapcdn)\.com.*$/,
 );
 
 workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
-  var searchInput = getSearchInput(args.url.search);
+  var searchInput = getSearchInputFromUrl(args.url.search);
   var request = args.event.request;
-  readAllData('input')
+  readAllData('pages')
     .then(function (response) {
       var findSearchInput = _.find(response, ['key', searchInput]);
       if (!findSearchInput) {
@@ -35,7 +36,7 @@ workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
           })
           .then(function (response) {
             var pages = response.query.pages
-            writeData('input', {
+            writeData('pages', {
               key: searchInput,
               pages: pages
             })
@@ -46,37 +47,40 @@ workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
 
 });
 
-workbox.precaching.precacheAndRoute([
-  {
+workbox.precaching.precacheAndRoute([{
     "url": "index.html",
-    "revision": "ae4094c86acc8950818cdf11a4b32827"
+    "revision": "56eb3eff0d0813b7ca23489f2da71f5d"
   },
   {
     "url": "manifest.json",
     "revision": "f3ed9a89c04b199f320bafb978490095"
   },
   {
-    "url": "shared/idb.js",
+    "url": "services/helpers.js",
+    "revision": "9ded6869d8408a1e3b44e93a6fcdf3e8"
+  },
+  {
+    "url": "services/idb.js",
     "revision": "edfbee0bb03a5947b5a680c980ecdc9f"
   },
   {
-    "url": "shared/lodash.js",
+    "url": "services/lodash.js",
     "revision": "c5729a02e9d05617360437e8d020a27a"
   },
   {
-    "url": "shared/utility.js",
-    "revision": "72946019bebd36526301d8707f13912d"
+    "url": "services/utility.js",
+    "revision": "5f2b90ecea21699f5ff0cff6a4868df6"
   },
   {
     "url": "style.css",
-    "revision": "85ecc83bc3b234d59c77cd6af8958637"
+    "revision": "019b870f74382f34d10af941606adf03"
   },
   {
     "url": "sw-base.js",
-    "revision": "bc3fcf826cf80be04d18338e1002dc5c"
+    "revision": "3dd8e7241a2382aff136bc86fe4a1a66"
   },
   {
     "url": "viewmodel.js",
-    "revision": "04c2f93b19a19c5103aaa3e967e0ab97"
+    "revision": "45e63d782f92fd5f301092831f77b1c0"
   }
 ]);

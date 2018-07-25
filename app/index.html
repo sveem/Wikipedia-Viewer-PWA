@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -8,48 +9,49 @@
 </head>
 
 <body>
-<div class="container-wrapper">
-  <h1 class="title" data-bind="text: title"></h1>
-
-<div class="container-search">
-  <div class="search-form">
-    <input class="form-control" data-bind="value: searchTerm" type="text" 
-    class="searchTerm" placeholder="What are you looking for?">
-    <button class="search-button" data-bind="click: searchPage(searchTerm)">
-      <span class="glyphicon glyphicon-search"></span>
-    </button>
-  </div>
-  <div class="options">
-    <button class="random-article-button" data-bind="click: $root.visitRandomWikiPage">Random Article</button> 
-    <select class="dropdown-button" data-bind= 
-      "options: searchResult,
-       value: searchValue,
-       optionsCaption: 'Choose...',
-       event: {change: onChange}" >
-    </select>
-  </div>
-</div>
-
-<div class="container-messages">
-  <ul data-bind="foreach: wikiKeys()">
-    <li data-bind="style: {display: $root.wikiKeys().length >= 1 ? 'list-item' : 'none'}">
-      <div class="container-card">
-        <h3 data-bind="text: $root.pages()[$data].title || $root.searchTerm"></h3>
-        <p class="extract" data-bind="text: $root.getFirstSentence($root.pages()[$data].extract)"></p> 
-        <div class="container-read-button">
-          <button class="read-button" data-bind="click: $root.visitSelectedWikiPage">Read More</button>   
+    <div class="container-wrapper">
+        <h1 class="title" data-bind="text: title"></h1>
+        <div class="container-search">
+            <div class="search-form">
+                <button class="search-button" data-bind="click: searchPage(searchTerm)">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+                <input class="form-control" data-bind="value: searchTerm" type="text" class="searchTerm" placeholder="What are you looking for?">
+                <button class="delete-button" data-bind="click: clearDropDownMenu">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </div>
+            <div class="options">
+                <button class="random-article-button" data-bind="click: $root.visitRandomWikiPage">Random Article</button>
+                <select class="dropdown-button" data-bind="options: searchResult,
+                    value: searchValue,
+                    optionsCaption: 'Choose...',
+                    event: {change: onChange}">
+                </select>
+            </div>
         </div>
-      </div>
-    </li>
-  </ul>
-</div>
 
-</div>
+        <div class="container-messages">
+            <ul data-bind="foreach: wikiKeys()">
+                <li data-bind="style: {display: $root.wikiKeys().length >= 1 ? 'list-item' : 'none'}">
+                    <div class="container-card">
+                        <h3 data-bind="text: $root.pages()[$data].title || $root.searchTerm"></h3>
+                        <p class="extract" data-bind="text: $root.getDescription($root.pages()[$data].extract)"></p>
+                        <div class="container-read-button">
+                            <button class="read-button" data-bind="click: $root.visitSelectedWikiPage">Read More</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
-    <script src="/app/shared/idb.js"></script>
-    <script src="/app/shared/lodash.js"></script>
-    <script src="/app/shared/utility.js"></script>
+    <script src="/app/services/idb.js"></script>
+    <script src="/app/services/lodash.js"></script>
+    <script src="/app/services/utility.js"></script>
+    <script src="/app/services/helpers.js"></script>
     <script src="/app/viewmodel.js"></script>
 </body>
 

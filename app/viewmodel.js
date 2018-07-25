@@ -7,30 +7,12 @@ app.vm = (function () {
   var searchTerm = '';
   var searchResult = ko.observableArray();
   var searchValue = ko.observable(searchResult()[0]);
-  var searchValueIndex = ko.observable();
+  var self = this;
 
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker
-      .register(sw)
-      .then(function () {
-        console.info('Service worker registered');
-      })
-      .catch(function (error) {
-        console.error('Error in Service worker', error);
-      });
-  }
+  self.registerServiceWorker(sw);
+  self.validateIndexedDB();
 
-  if (!('indexedDB' in window)) {
-    console.error('This browser doesn\'t support IndexedDB');
-    return;
-  }
-
-  // if (!window.navigator.onLine) {
-    readAllData('terms')
-      .then(function (data) {
-        searchResult(data);
-      });
-  // }
+  loadDropDownMenu();
 
   function searchPage(term) {
     var query = term.toLowerCase();
@@ -51,16 +33,18 @@ app.vm = (function () {
   }
 
   function addSearchResult(search) {
-    if (search && _.indexOf(searchResult(), search) === -1) {
-      searchResult.push(search);
-      readAllData('terms')
-        .then(function (response) {
-          if (_.indexOf(response, search) === -1) {
-            writeData('terms', search);
-          }
-        })
+    if (window.navigator.onLine) {
+      if (search && _.indexOf(searchResult(), search) === -1) {
+        searchResult.push(search);
+        self.readAllData('queries')
+          .then(function (response) {
+            if (_.indexOf(response, search) === -1) {
+              self.writeData('queries', search);
+
+            }
+          })
+      }
     }
-    return;
   }
 
   var wikiKeys = ko.computed(function () {
@@ -71,24 +55,23 @@ app.vm = (function () {
     return storage;
   });;
 
-  function getFirstSentence(extract) {
-    return extract ? extract.split('. ')[0] : undefined;
+  function loadDropDownMenu() {
+    self.readAllData('queries')
+      .then(function (data) {
+        searchResult(data);
+      });
   }
 
-  function visitSelectedWikiPage(id) {
-    var url = 'https://en.wikipedia.org/?curid='
-    return window.location.href = (url + id);
-  }
-
-  function visitRandomWikiPage() {
-    var url = "https://en.wikipedia.org/wiki/Special:Random";
-    return window.location.href = url;
+  function clearDropDownMenu() {
+    self.clearAllData('queries');
+    self.clearAllData('pages');
+    searchResult([]);
   }
 
   function onChange(event) {
     searchPage(searchValue());
     if (!window.navigator.onLine) {
-      readAllData('input')
+      self.readAllData('pages')
         .then(function (data) {
           pages(_.find(data, ['key', searchValue()]).pages)
           wikiKeys();
@@ -102,12 +85,13 @@ app.vm = (function () {
     searchPage: searchPage,
     wikiKeys: wikiKeys,
     pages: pages,
-    visitSelectedWikiPage: visitSelectedWikiPage,
-    getFirstSentence: getFirstSentence,
-    visitRandomWikiPage: visitRandomWikiPage,
+    visitSelectedWikiPage: this.visitSelectedWikiPage,
+    getDescription: this.getDescription,
+    visitRandomWikiPage: this.visitRandomWikiPage,
     searchResult: searchResult,
     searchValue: searchValue,
-    onChange: onChange
+    onChange: onChange,
+    clearDropDownMenu: clearDropDownMenu
   };
 
   return vm;

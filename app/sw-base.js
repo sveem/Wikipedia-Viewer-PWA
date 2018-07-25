@@ -1,7 +1,8 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.3.1/workbox-sw.js");
-importScripts('./shared/lodash.js');
-importScripts('./shared/idb.js');
-importScripts('./shared/utility.js');
+importScripts('./services/lodash.js');
+importScripts('./services/idb.js');
+importScripts('./services/utility.js');
+importScripts('./services/helpers.js');
 
 workbox.routing.registerRoute(/.*(?:googleapis|gstatic)\.com.*$/,
   new workbox.strategies.StaleWhileRevalidate({
@@ -22,9 +23,9 @@ workbox.routing.registerRoute(/.*(?:bootstrapcdn)\.com.*$/,
 );
 
 workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
-  var searchInput = getSearchInput(args.url.search);
+  var searchInput = getSearchInputFromUrl(args.url.search);
   var request = args.event.request;
-  readAllData('input')
+  readAllData('pages')
     .then(function (response) {
       var findSearchInput = _.find(response, ['key', searchInput]);
       if (!findSearchInput) {
@@ -35,7 +36,7 @@ workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
           })
           .then(function (response) {
             var pages = response.query.pages
-            writeData('input', {
+            writeData('pages', {
               key: searchInput,
               pages: pages
             })
