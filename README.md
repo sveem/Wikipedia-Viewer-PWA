@@ -1,7 +1,7 @@
 # Wikipedia PWA Viewer
 
 ## Description: 
-Wikipedia PWA Viewer
+Wikipedia PWA Viewer which can search Wikipedia entries, stores the resulting pages in indexedDB and shows them online/offline.
 
 ## Built With
 
