@@ -24,11 +24,12 @@ app.vm = (function () {
     addSearchResult(query);
 
     if (query && window.navigator.onLine) {
-      $.getJSON(url).then(function (response) {
-        response.query ? pages(response.query.pages) : pages({
-          info: 'The search parameter must be set'
+      $.getJSON(url)
+        .then(function (response) {
+          response.query 
+          ? pages(response.query.pages) 
+          : pages({ info: 'The search parameter must be set' });
         });
-      });
     }
   }
 
@@ -40,7 +41,6 @@ app.vm = (function () {
           .then(function (response) {
             if (_.indexOf(response, search) === -1) {
               self.writeData('queries', search);
-
             }
           })
       }
@@ -48,11 +48,11 @@ app.vm = (function () {
   }
 
   var wikiKeys = ko.computed(function () {
-    var storage = [];
+    var keyStorage = [];
     _.forIn(pages(), function (value, key) {
-      storage.push(key);
+      keyStorage.push(key);
     })
-    return storage;
+    return keyStorage;
   });;
 
   function loadDropDownMenu() {
@@ -73,7 +73,7 @@ app.vm = (function () {
     if (!window.navigator.onLine) {
       self.readAllData('pages')
         .then(function (data) {
-          pages(_.find(data, ['key', searchValue()]).pages)
+          pages(_.find(data, ['key', searchValue()]).pages);
           wikiKeys();
         })
     }

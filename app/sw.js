@@ -31,11 +31,11 @@ workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
       if (!findSearchInput) {
         fetch(request)
           .then(function (response) {
-            var clonedRes = response.clone()
+            var clonedRes = response.clone();
             return clonedRes.json();
           })
           .then(function (response) {
-            var pages = response.query.pages
+            var pages = response.query.pages;
             writeData('pages', {
               key: searchInput,
               pages: pages
@@ -44,12 +44,12 @@ workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
           });
       }
     })
-
 });
 
-workbox.precaching.precacheAndRoute([{
+workbox.precaching.precacheAndRoute([
+  {
     "url": "index.html",
-    "revision": "56eb3eff0d0813b7ca23489f2da71f5d"
+    "revision": "08be2d67699ae6190770eb5f20a582d3"
   },
   {
     "url": "manifest.json",
@@ -69,7 +69,7 @@ workbox.precaching.precacheAndRoute([{
   },
   {
     "url": "services/utility.js",
-    "revision": "5f2b90ecea21699f5ff0cff6a4868df6"
+    "revision": "cf15dd9d453eb4bdeba3701a2e03be31"
   },
   {
     "url": "style.css",
@@ -77,10 +77,10 @@ workbox.precaching.precacheAndRoute([{
   },
   {
     "url": "sw-base.js",
-    "revision": "3dd8e7241a2382aff136bc86fe4a1a66"
+    "revision": "f2eb9f7e964b1c6dbed205531f61f900"
   },
   {
     "url": "viewmodel.js",
-    "revision": "45e63d782f92fd5f301092831f77b1c0"
+    "revision": "ba4a1af3841a9e7cf9ab5afa4df5d586"
   }
 ]);
