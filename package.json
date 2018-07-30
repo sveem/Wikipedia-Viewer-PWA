@@ -1,25 +1,20 @@
 {
-  "name": "wikipedia-viewer-pwa",
+  "name": "wikipedia-pwa-viewer",
   "version": "1.0.0",
-  "description": "",
+  "description": "Wikipedia-PWA-Viewer",
   "main": "viewmodel.js",
   "dependencies": {
-    "workbox-cli": "^3.3.1"
+    "workbox-cli": "^3.3.1",
+    "http-server": "^0.11.1"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "generate-sw": "workbox generateSW",
-    "inject": "workbox injectManifest"
+    "start": "http-server -p 5600"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sveem/Wikipedia-Viewer-PWA.git"
   },
-  "author": "",
+  "author": "Svetlin Mladenov",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sveem/Wikipedia-Viewer-PWA/issues"
-  },
   "homepage": "https://github.com/sveem/Wikipedia-Viewer-PWA#readme"
 }

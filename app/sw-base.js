@@ -31,11 +31,11 @@ workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
       if (!findSearchInput) {
         fetch(request)
           .then(function (response) {
-            var clonedRes = response.clone()
+            var clonedRes = response.clone();
             return clonedRes.json();
           })
           .then(function (response) {
-            var pages = response.query.pages
+            var pages = response.query.pages;
             writeData('pages', {
               key: searchInput,
               pages: pages
@@ -44,7 +44,6 @@ workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
           });
       }
     })
-
 });
 
 workbox.precaching.precacheAndRoute([]);

@@ -9,15 +9,12 @@ function registerServiceWorker(sw) {
         console.error('Error in Service worker', error);
       });
   }
-  return;
 }
 
 function validateIndexedDB() {
   if (!('indexedDB' in window)) {
     console.error('This browser doesn\'t support IndexedDB');
-    return;
   }
-  return;
 }
 
 var dbPromise = idb.open('wikipedia', 1, function (db) {
