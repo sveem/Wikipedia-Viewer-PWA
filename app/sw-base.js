@@ -6,13 +6,7 @@ importScripts('./services/helpers.js');
 
 workbox.routing.registerRoute(/.*(?:googleapis|gstatic)\.com.*$/,
   new workbox.strategies.StaleWhileRevalidate({
-    cacheName: 'google-fonts',
-    plugins: [
-      new workbox.expiration.Plugin({
-        maxAgeSeconds: 60 * 60 * 24 * 30,
-        maxEntries: 3
-      })
-    ]
+    cacheName: 'google-fonts'
   })
 );
 
