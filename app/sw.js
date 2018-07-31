@@ -6,13 +6,7 @@ importScripts('./services/helpers.js');
 
 workbox.routing.registerRoute(/.*(?:googleapis|gstatic)\.com.*$/,
   new workbox.strategies.StaleWhileRevalidate({
-    cacheName: 'google-fonts',
-    plugins: [
-      new workbox.expiration.Plugin({
-        maxAgeSeconds: 60 * 60 * 24 * 30,
-        maxEntries: 3
-      })
-    ]
+    cacheName: 'google-fonts'
   })
 );
 
@@ -49,7 +43,7 @@ workbox.routing.registerRoute(/.*(?:wikipedia)\.org.*$/, function (args) {
 workbox.precaching.precacheAndRoute([
   {
     "url": "index.html",
-    "revision": "08be2d67699ae6190770eb5f20a582d3"
+    "revision": "56eb3eff0d0813b7ca23489f2da71f5d"
   },
   {
     "url": "manifest.json",
@@ -69,7 +63,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "services/utility.js",
-    "revision": "cf15dd9d453eb4bdeba3701a2e03be31"
+    "revision": "df0f65c9c4b9eb525ee131c6cf98159c"
   },
   {
     "url": "style.css",
@@ -77,7 +71,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "sw-base.js",
-    "revision": "f2eb9f7e964b1c6dbed205531f61f900"
+    "revision": "b452a2508c484fd18cd0c482f2dbc618"
   },
   {
     "url": "viewmodel.js",
